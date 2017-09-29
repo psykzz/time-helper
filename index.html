@@ -1,29 +1,69 @@
 <html>
-<title>
-  Riot Time selector
-</title>
+  <head>
+    <title>
+      Riot Time selector
+    </title>
+    <style>
+    .container {
+      padding: 25px;
+    }
+    </style>
+    <!-- Compiled and minified CSS -->
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+
+
+  </head>
+
 <body>
+  <div class="container">
 
-  <select id='region-selector'>
+    <h2>Time helper</h2>
 
-  </select>
-  <input id='localtime' type="time" />
+    <div class="row">
+      <form class="col s12">
+        <div class="input-field col s6">
+          <select id='region-selector'>
+            <option>test value</option>
+          </select>
+          <label for="region-selector">Region</label>
+        </div>
+        <div class="input-field col s6">
+           <input type="text" id='local-time' class="timepicker">
+          <label for="local-time">Time</label>
+        </div>
+      </form>
+    </div>
 
-  <br />
-  <br />
-  <br />
-  NA Time: <span id='na-time'></span><br />
-  EUW Time: <span id='euw-time'></span><br />
-  EUNE Time: <span id='eune-time'></span><br />
-  TR Time: <span id='tr-time'></span><br />
-  RU Time: <span id='ru-time'></span><br />
-  LAN Time: <span id='lan-time'></span><br />
-  LAS Time: <span id='las-time'></span><br />
-  BR Time: <span id='br-time'></span><br />
-  JP Time: <span id='jp-time'></span><br />
-  KR Time: <span id='kr-time'></span><br />
+    <div class="card-panel">
+      <span class="blue-text text-darken-2">Ensure you have filled out the time and selected your region for the values to appear.</span>
+    </div>
+
+    <div class="card-panel">
+      <span class="">
+        <h5>
+          Region time
+        </h5>
+
+        NA Time: <span id='na-time'></span><br />
+        EUW Time: <span id='euw-time'></span><br />
+        EUNE Time: <span id='eune-time'></span><br />
+        TR Time: <span id='tr-time'></span><br />
+        RU Time: <span id='ru-time'></span><br />
+        LAN Time: <span id='lan-time'></span><br />
+        LAS Time: <span id='las-time'></span><br />
+        BR Time: <span id='br-time'></span><br />
+        JP Time: <span id='jp-time'></span><br />
+        KR Time: <span id='kr-time'></span><br />
+      </span>
+    </div>
 
 
+  </div>
+
+  <!-- Compiled and minified JavaScript -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 <script>
 ((doc) => {
   var regions = {
@@ -39,7 +79,7 @@
     'kr': 10
   }
   var $select = doc.querySelector('#region-selector')
-  var $time = doc.querySelector('#localtime')
+  var $time = doc.querySelector('#local-time')
 
   while($select.firstChild) {
     $select.firstChild.remove();
@@ -51,6 +91,7 @@
   })
 
   var onUpdate = () => {
+    console.log("change detected")
     var $select = doc.querySelector('#region-selector')
     var otherRegions = Object.keys(regions).filter(r => {
       return r.value !== $select.value;
@@ -67,9 +108,25 @@
     });
   };
 
-  $time.addEventListener('input', onUpdate);
-  $select.addEventListener('input', onUpdate)
+  $($time).on('change', onUpdate);
+  $($select).on('change', onUpdate);
+
+  $(document).ready(function() {
+    $('select').material_select();
+  });
+  $('.timepicker').pickatime({
+    default: 'now', // Set default time: 'now', '1:30AM', '16:30'
+    fromnow: 0,       // set default time to * milliseconds from now (using with default = 'now')
+    twelvehour: false, // Use AM/PM or 24-hour format
+    donetext: 'OK', // text for done-button
+    cleartext: 'Clear', // text for clear-button
+    canceltext: 'Cancel', // Text for cancel-button
+    autoclose: true, // automatic close timepicker
+    ampmclickable: true, // make AM PM clickable
+    aftershow: function(){} //Function for after opening timepicker
+  });
 })(document)
+
 </script>
 
 
