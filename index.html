@@ -1,0 +1,77 @@
+<html>
+<title>
+  Riot Time selector
+</title>
+<body>
+
+  <select id='region-selector'>
+
+  </select>
+  <input id='localtime' type="time" />
+
+  <br />
+  <br />
+  <br />
+  NA Time: <span id='na-time'></span><br />
+  EUW Time: <span id='euw-time'></span><br />
+  EUNE Time: <span id='eune-time'></span><br />
+  TR Time: <span id='tr-time'></span><br />
+  RU Time: <span id='ru-time'></span><br />
+  LAN Time: <span id='lan-time'></span><br />
+  LAS Time: <span id='las-time'></span><br />
+  BR Time: <span id='br-time'></span><br />
+  JP Time: <span id='jp-time'></span><br />
+  KR Time: <span id='kr-time'></span><br />
+
+
+<script>
+((doc) => {
+  var regions = {
+    'na': -8,
+    'euw': 0,
+    'eune': 2,
+    'tr': 2,
+    'ru': 3,
+    'lan': -6,
+    'las': -6,
+    'br': -6,
+    'jp': 10,
+    'kr': 10
+  }
+  var $select = doc.querySelector('#region-selector')
+  var $time = doc.querySelector('#localtime')
+
+  while($select.firstChild) {
+    $select.firstChild.remove();
+  }
+  Object.keys(regions).forEach(region => {
+    var item = doc.createElement('option')
+    item.textContent = region
+    $select.appendChild(item);
+  })
+
+  var onUpdate = () => {
+    var $select = doc.querySelector('#region-selector')
+    var otherRegions = Object.keys(regions).filter(r => {
+      return r.value !== $select.value;
+    })
+    otherRegions.forEach(region => {
+      var [hour, minute, second] = $time.value.split(':')
+      var d = new Date();
+      hour = parseInt(hour, 10) + (regions[region] - regions[$select.value])
+      d.setHours(hour)
+      d.setMinutes(minute)
+      // d.setSeconds(second)
+      var regionTime = d.toTimeString().split(' ')[0].substr(0, 5);
+      doc.querySelector(`#${region}-time`).textContent = regionTime;
+    });
+  };
+
+  $time.addEventListener('input', onUpdate);
+  $select.addEventListener('input', onUpdate)
+})(document)
+</script>
+
+
+</body>
+</html>
