@@ -1,7 +1,7 @@
 <html>
   <head>
     <title>
-      Riot Time selector
+      Region Time selector
     </title>
     <style>
     .container {
@@ -27,10 +27,14 @@
           </select>
           <label for="region-selector">Region</label>
         </div>
-        <div class="input-field col s6">
+         <div class="input-field col s3">
+           <input type="text" id='local-date' class="datepicker">
+           <label for="local-date">Date</label>
+         </div>
+         <div class="input-field col s3">
            <input type="text" id='local-time' class="timepicker">
-          <label for="local-time">Time</label>
-        </div>
+           <label for="local-time">Time</label>
+         </div>
       </form>
     </div>
 
@@ -44,26 +48,28 @@
           Region time
         </h5>
 
-        NA Time: <span id='na-time'></span> (PST / PDT)<br />
-        EUW Time: <span id='euw-time'></span> (GMT / BST)<br />
-          &nbsp;&nbsp;&nbsp;&nbsp; - English Time: <span id='engb-time'></span> (GMT / BST)<br />
-          &nbsp;&nbsp;&nbsp;&nbsp; - French Time: <span id='fr-time'></span> (GMT / BST)<br />
-          &nbsp;&nbsp;&nbsp;&nbsp; - German Time: <span id='de-time'></span> (GMT / BST)<br />
-          &nbsp;&nbsp;&nbsp;&nbsp; - Italian Time: <span id='it-time'></span> (GMT / BST)<br />
-          &nbsp;&nbsp;&nbsp;&nbsp; - Spanish Time: <span id='es-time'></span> (GMT / BST)<br />
-        EUNE Time: <span id='eune-time'></span> (CEST)<br />
-          &nbsp;&nbsp;&nbsp;&nbsp; - English Time: <span id='enpl-time'></span> (CET / CEST)<br />
-          &nbsp;&nbsp;&nbsp;&nbsp; - Polish Time: <span id='pl-time'></span> (CET / CEST)<br />
-          &nbsp;&nbsp;&nbsp;&nbsp; - Greek Time: <span id='el-time'></span> (CET / CEST)<br />
-          &nbsp;&nbsp;&nbsp;&nbsp; - Czech Time: <span id='cs-time'></span> (CET / CEST)<br />
-          &nbsp;&nbsp;&nbsp;&nbsp; - Hungarian Time: <span id='hu-time'></span> (CET / CEST)<br />
-        TR Time: <span id='tr-time'></span> (TRT)<br />
-        RU Time: <span id='ru-time'></span> (RUT)<br />
-        LAN Time: <span id='lan-time'></span> (CST / CDT)<br />
-        LAS Time: <span id='las-time'></span> (ART)<br />
-        BR Time: <span id='br-time'></span> (BRT)<br />
-        JP Time: <span id='jp-time'></span> (JST)<br />
-        KR Time: <span id='kr-time'></span> (KST)<br />
+        <strong>NA Time:</strong> <span id='na-time'></span> (PST / PDT)<br /><br />
+        <strong>EUW Time:</strong> <span id='euw-time'></span> (GMT / BST)<br />
+          &nbsp;&nbsp;&nbsp;&nbsp; - <strong>English Time:</strong> <span id='engb-time'></span> (GMT / BST)<br />
+          &nbsp;&nbsp;&nbsp;&nbsp; - <strong>French Time:</strong> <span id='fr-time'></span> (GMT / BST)<br />
+          &nbsp;&nbsp;&nbsp;&nbsp; - <strong>German Time:</strong> <span id='de-time'></span> (GMT / BST)<br />
+          &nbsp;&nbsp;&nbsp;&nbsp; - <strong>Italian Time:</strong> <span id='it-time'></span> (GMT / BST)<br />
+          &nbsp;&nbsp;&nbsp;&nbsp; - <strong>Spanish Time:</strong> <span id='es-time'></span> (GMT / BST)<br />
+          <br />
+        <strong>EUNE Time:</strong> <span id='eune-time'></span> (CEST)<br />
+          &nbsp;&nbsp;&nbsp;&nbsp; - <strong>English Time:</strong> <span id='enpl-time'></span> (CET / CEST)<br />
+          &nbsp;&nbsp;&nbsp;&nbsp; - <strong>Polish Time:</strong> <span id='pl-time'></span> (CET / CEST)<br />
+          &nbsp;&nbsp;&nbsp;&nbsp; - <strong>Greek Time:</strong> <span id='el-time'></span> (CET / CEST)<br />
+          &nbsp;&nbsp;&nbsp;&nbsp; - <strong>Czech Time:</strong> <span id='cs-time'></span> (CET / CEST)<br />
+          &nbsp;&nbsp;&nbsp;&nbsp; - <strong>Hungarian Time:</strong> <span id='hu-time'></span> (CET / CEST)<br />
+          <br />
+        <strong>TR Time:</strong> <span id='tr-time'></span> (TRT)<br /><br />
+        <strong>RU Time:</strong> <span id='ru-time'></span> (RUT)<br /><br />
+        <strong>LAN Time:</strong> <span id='lan-time'></span> (CST / CDT)<br /><br />
+        <strong>LAS Time:</strong> <span id='las-time'></span> (ART)<br /><br />
+        <strong>BR Time:</strong> <span id='br-time'></span> (BRT)<br /><br />
+        <strong>JP Time:</strong> <span id='jp-time'></span> (JST)<br /><br />
+        <strong>KR Time:</strong> <span id='kr-time'></span> (KST)<br /><br />
       </span>
     </div>
 
@@ -76,6 +82,13 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 <script>
 ((doc) => {
+
+  Date.prototype.addHours = function(h) {
+   this.setTime(this.getTime() + (h*60*60*1000));
+   return this;
+}
+
+
   var regions = {
     'na': {time: -8, name: 'NA (PST / PDT)'},
     'euw': {time: 0, name: 'EUW (GMT / BST)'},
@@ -85,6 +98,7 @@
     'it': {time: 0, name: 'Italian'},
     'es': {time: 0, name: 'Spanish'},
     'eune': {time: 2, name: 'EUNE (CET / CEST)'},
+    'enpl': {time: 2, name: 'English (CET / CEST)'},
     'pl': {time: 2, name: 'Polish'},
     'el': {time: 2, name: 'Greek'},
     'hu': {time: 2, name: 'Hungarian'},
@@ -99,6 +113,7 @@
   }
   var $select = doc.querySelector('#region-selector')
   var $time = doc.querySelector('#local-time')
+  var $date = doc.querySelector('#local-date')
 
   while($select.firstChild) {
     $select.firstChild.remove();
@@ -112,18 +127,19 @@
   })
 
   var onUpdate = () => {
+    console.log($date.value, $time.value);
     var $select = doc.querySelector('#region-selector')
+    var [hour, minute, second] = $time.value.split(':')
+    var [day, month, year] = $date.value.split('-')
+
     var otherRegions = Object.keys(regions).filter(r => {
       return r !== $select.value;
     })
+
     otherRegions.forEach(region => {
-      var [hour, minute, second] = $time.value.split(':')
-      var d = new Date();
-      hour = parseInt(hour, 10) + (regions[region].time - regions[$select.value].time)
-      d.setHours(hour)
-      d.setMinutes(minute)
-      // d.setSeconds(second)
-      var regionTime = d.toTimeString().split(' ')[0].substr(0, 5);
+      var d = new Date(year, month, day, hour, minute, 0);
+      d.addHours((regions[region].time - regions[$select.value].time))
+      var regionTime = d.toLocaleString();
       doc.querySelector(`#${region}-time`).textContent = regionTime;
     });
   };
@@ -133,6 +149,15 @@
 
   $(document).ready(function() {
     $('select').material_select();
+  });
+  $('.datepicker').pickadate({
+    selectMonths: true, // Creates a dropdown to control month
+    selectYears: 3, // Creates a dropdown of 15 years to control year,
+    today: 'Today',
+    clear: 'Clear',
+    close: 'Ok',
+    format: 'dd-mm-yyyy',
+    closeOnSelect: true // Close upon selecting a date,
   });
   $('.timepicker').pickatime({
     default: 'now', // Set default time: 'now', '1:30AM', '16:30'
