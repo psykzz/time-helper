@@ -51,26 +51,27 @@
         <strong>NA Time:</strong> <span id='na-time'></span> (PST / PDT)<br /><br />
         <strong>EUW Time:</strong> <span id='euw-time'></span> (GMT / BST)<br />
           &nbsp;&nbsp;&nbsp;&nbsp; - <strong>English Time:</strong> <span id='engb-time'></span> (GMT / BST)<br />
-          &nbsp;&nbsp;&nbsp;&nbsp; - <strong>French Time:</strong> <span id='fr-time'></span> (GMT / BST)<br />
-          &nbsp;&nbsp;&nbsp;&nbsp; - <strong>German Time:</strong> <span id='de-time'></span> (GMT / BST)<br />
-          &nbsp;&nbsp;&nbsp;&nbsp; - <strong>Italian Time:</strong> <span id='it-time'></span> (GMT / BST)<br />
-          &nbsp;&nbsp;&nbsp;&nbsp; - <strong>Spanish Time:</strong> <span id='es-time'></span> (GMT / BST)<br />
+          &nbsp;&nbsp;&nbsp;&nbsp; - <strong>French Time:</strong> <span id='fr-time'></span> (GMT +1)<br />
+          &nbsp;&nbsp;&nbsp;&nbsp; - <strong>German Time:</strong> <span id='de-time'></span> (GMT +1)<br />
+          &nbsp;&nbsp;&nbsp;&nbsp; - <strong>Italian Time:</strong> <span id='it-time'></span> (GMT +1)<br />
+          &nbsp;&nbsp;&nbsp;&nbsp; - <strong>Spanish Time:</strong> <span id='es-time'></span> (GMT +1)<br />
           <br />
         <strong>EUNE Time:</strong> <span id='eune-time'></span> (CEST)<br />
           &nbsp;&nbsp;&nbsp;&nbsp; - <strong>English Time:</strong> <span id='enpl-time'></span> (CET / CEST)<br />
           &nbsp;&nbsp;&nbsp;&nbsp; - <strong>Polish Time:</strong> <span id='pl-time'></span> (CET / CEST)<br />
-          &nbsp;&nbsp;&nbsp;&nbsp; - <strong>Greek Time:</strong> <span id='el-time'></span> (CET / CEST)<br />
+          &nbsp;&nbsp;&nbsp;&nbsp; - <strong>Greek Time:</strong> <span id='el-time'></span> (EET)<br />
           &nbsp;&nbsp;&nbsp;&nbsp; - <strong>Czech Time:</strong> <span id='cs-time'></span> (CET / CEST)<br />
+          &nbsp;&nbsp;&nbsp;&nbsp; - <strong>Romanian Time:</strong> <span id='ro-time'></span> (EET)<br />
           &nbsp;&nbsp;&nbsp;&nbsp; - <strong>Hungarian Time:</strong> <span id='hu-time'></span> (CET / CEST)<br />
           <br />
-        <strong>TR Time:</strong> <span id='tr-time'></span> (TRT)<br /><br />
+        <!-- <strong>TR Time:</strong> <span id='tr-time'></span> (TRT)<br /><br />
         <strong>RU Time:</strong> <span id='ru-time'></span> (RUT)<br /><br />
         <strong>LAN Time:</strong> <span id='lan-time'></span> (CST / CDT)<br /><br />
         <strong>LAS Time:</strong> <span id='las-time'></span> (ART)<br /><br />
         <strong>BR Time:</strong> <span id='br-time'></span> (BRT)<br /><br />
         <strong>JP Time:</strong> <span id='jp-time'></span> (JST)<br /><br />
         <strong>KR Time:</strong> <span id='kr-time'></span> (KST)<br /><br />
-      </span>
+      </span> -->
     </div>
 
 
@@ -92,23 +93,24 @@
     'na': {time: -8, name: 'NA (PST / PDT)'},
     'euw': {time: 0, name: 'EUW (GMT / BST)'},
     'engb': {time: 0, name: 'English (GMT / BST)'},
-    'fr': {time: 0, name: 'French'},
-    'de': {time: 0, name: 'German'},
-    'it': {time: 0, name: 'Italian'},
-    'es': {time: 0, name: 'Spanish'},
-    'eune': {time: 2, name: 'EUNE (CET / CEST)'},
-    'enpl': {time: 2, name: 'English (CET / CEST)'},
-    'pl': {time: 2, name: 'Polish'},
+    'fr': {time: 1, name: 'French'},
+    'de': {time: 1, name: 'German'},
+    'it': {time: 1, name: 'Italian'},
+    'es': {time: 1, name: 'Spanish'},
+    'eune': {time: 0, name: 'EUNE (CET / CEST)'},
+    'enpl': {time: 0, name: 'English (CET / CEST)'},
+    'pl': {time: 1, name: 'Polish'},
     'el': {time: 2, name: 'Greek'},
-    'hu': {time: 2, name: 'Hungarian'},
-    'cs': {time: 2, name: 'Czech'},
-    'tr': {time: 3, name: 'TR (TRT)'},
-    'ru': {time: 4, name: 'RU (MSK)'},
-    'lan': {time: -6, name: 'LAN (CST / CDT)'},
-    'las': {time: -3, name: 'LAS (ART)'},
-    'br': {time: -3, name: 'BR (BRT)'},
-    'jp': {time: 9, name: 'JP (JST)'},
-    'kr': {time: 9, name: 'KR (KST)'}
+    'hu': {time: 1, name: 'Hungarian'},
+    'cs': {time: 1, name: 'Czech'},
+    'ro': {time: 2, name: 'Romania'},
+    // 'tr': {time: (dls)?2:3, name: 'TR (TRT)'},
+    // 'ru': {time: 4, name: 'RU (MSK)'},
+    // 'lan': {time: -6, name: 'LAN (CST / CDT)'},
+    // 'las': {time: -3, name: 'LAS (ART)'},
+    // 'br': {time: -3, name: 'BR (BRT)'},
+    // 'jp': {time: 9, name: 'JP (JST)'},
+    // 'kr': {time: 9, name: 'KR (KST)'}
   }
   var $select = doc.querySelector('#region-selector')
   var $time = doc.querySelector('#local-time')
