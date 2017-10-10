@@ -139,7 +139,7 @@
       console.log(region, (regions[region].time - regions[$select.value].time));
       var d = new Date(year, (month-1), day, hour, minute, 0);
       d.addHours((regions[region].time - regions[$select.value].time))
-      var regionTime = d.toLocaleString();
+      var regionTime = d.toLocaleString('en-GB');
       doc.querySelector(`#${region}-time`).textContent = regionTime;
     });
   };
