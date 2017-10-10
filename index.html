@@ -112,7 +112,6 @@
   })
 
   var onUpdate = () => {
-    console.log("change detected")
     var $select = doc.querySelector('#region-selector')
     var otherRegions = Object.keys(regions).filter(r => {
       return r !== $select.value;
