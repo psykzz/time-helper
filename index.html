@@ -83,11 +83,10 @@
 <script>
 ((doc) => {
 
-  Date.prototype.addHours = function(h) {
-   this.setTime(this.getTime() + (h*60*60*1000));
-   return this;
-}
-
+  Date.prototype.addHours = function(h){
+    this.setHours(this.getHours()+h);
+    return this;
+  }
 
   var regions = {
     'na': {time: -8, name: 'NA (PST / PDT)'},
@@ -137,7 +136,8 @@
     })
 
     otherRegions.forEach(region => {
-      var d = new Date(year, month, day, hour, minute, 0);
+      console.log(region, (regions[region].time - regions[$select.value].time));
+      var d = new Date(year, (month-1), day, hour, minute, 0);
       d.addHours((regions[region].time - regions[$select.value].time))
       var regionTime = d.toLocaleString();
       doc.querySelector(`#${region}-time`).textContent = regionTime;
