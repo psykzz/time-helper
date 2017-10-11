@@ -57,12 +57,12 @@
           &nbsp;&nbsp;&nbsp;&nbsp; - <strong>Spanish Time:</strong> <span id='es-time'></span> (GMT +1)<br />
           <br />
         <strong>EUNE Time:</strong> <span id='eune-time'></span> (CEST)<br />
-          &nbsp;&nbsp;&nbsp;&nbsp; - <strong>English Time:</strong> <span id='enpl-time'></span> (CET / CEST)<br />
-          &nbsp;&nbsp;&nbsp;&nbsp; - <strong>Polish Time:</strong> <span id='pl-time'></span> (CET / CEST)<br />
+          &nbsp;&nbsp;&nbsp;&nbsp; - <strong>English Time:</strong> <span id='enpl-time'></span> (CEST)<br />
+          &nbsp;&nbsp;&nbsp;&nbsp; - <strong>Polish Time:</strong> <span id='pl-time'></span> (CEST)<br />
           &nbsp;&nbsp;&nbsp;&nbsp; - <strong>Greek Time:</strong> <span id='el-time'></span> (EET)<br />
-          &nbsp;&nbsp;&nbsp;&nbsp; - <strong>Czech Time:</strong> <span id='cs-time'></span> (CET / CEST)<br />
+          &nbsp;&nbsp;&nbsp;&nbsp; - <strong>Czech Time:</strong> <span id='cs-time'></span> (CEST)<br />
           &nbsp;&nbsp;&nbsp;&nbsp; - <strong>Romanian Time:</strong> <span id='ro-time'></span> (EET)<br />
-          &nbsp;&nbsp;&nbsp;&nbsp; - <strong>Hungarian Time:</strong> <span id='hu-time'></span> (CET / CEST)<br />
+          &nbsp;&nbsp;&nbsp;&nbsp; - <strong>Hungarian Time:</strong> <span id='hu-time'></span> (CEST)<br />
           <br />
         <!-- <strong>TR Time:</strong> <span id='tr-time'></span> (TRT)<br /><br />
         <strong>RU Time:</strong> <span id='ru-time'></span> (RUT)<br /><br />
@@ -97,8 +97,8 @@
     'de': {time: 1, name: 'German'},
     'it': {time: 1, name: 'Italian'},
     'es': {time: 1, name: 'Spanish'},
-    'eune': {time: 0, name: 'EUNE (CET / CEST)'},
-    'enpl': {time: 0, name: 'English (CET / CEST)'},
+    'eune': {time: 1, name: 'EUNE (CEST)'},
+    'enpl': {time: 1, name: 'English (CEST)'},
     'pl': {time: 1, name: 'Polish'},
     'el': {time: 2, name: 'Greek'},
     'hu': {time: 1, name: 'Hungarian'},
@@ -141,7 +141,7 @@
       console.log(region, (regions[region].time - regions[$select.value].time));
       var d = new Date(year, (month-1), day, hour, minute, 0);
       d.addHours((regions[region].time - regions[$select.value].time))
-      var regionTime = d.toLocaleString('en-GB');
+      var regionTime = d.toLocaleString('en-GB').slice(0, -2);
       doc.querySelector(`#${region}-time`).textContent = regionTime;
     });
   };
